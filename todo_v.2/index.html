@@ -1,0 +1,98 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-app="myApp" ng-controller="myController">
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Todo App</h1>
+    
+    <!-- Add Todo Button -->
+    <button class="btn btn-primary mb-3" ng-click="openModal()">Add Todo</button>
+
+    <!-- Todo Table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th><button class="btn btn-link" ng-click="sortBy('title')">Title</button></th>
+            <th><button class="btn btn-link" ng-click="sortBy('taskType')">Task Type</button></th>
+            <th><button class="btn btn-link" ng-click="sortBy('dueDate')">Due Date</button></th>
+            <th><button class="btn btn-link" ng-click="sortBy('cost')">Cost</button></th>
+        </tr>
+    </thead>
+        <tbody id="todoList">
+    <tr ng-repeat="todo in todos" data-index="{{$index}}">
+        
+                <td><input type="checkbox" ng-model="todo.completed"></td>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.taskType }}</td>
+                <td>{{ getDueDateDisplay(todo.dueDate) }}</td>
+                <td>{{ todo.cost }}</td>
+                <td>
+                    <div class="delete-btn" ng-show="todo.showDeleteButton" ng-click="deleteTodo(todo)">Delete</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Add Todo Modal -->
+<div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="addTodoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTodoModalLabel">Add Todo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="todoTitle">Title:</label>
+                    <input type="text" class="form-control" id="todoTitle" ng-model="newTodo.title">
+                </div>
+                <div class="form-group">
+                    <label for="taskType">Task Type:</label>
+                    <select class="form-control" id="taskType" ng-model="newTodo.taskType">
+                        <option value="Water">Water</option>
+                        <option value="Harvest">Harvest</option>
+                        <option value="Plant">Plant</option>
+                        <option value="Fertilize">Fertilize</option>
+                        <option value="">-- Add New Task Type --</option>
+                    </select>
+                    <input type="text" class="form-control mt-2" placeholder="New Task Type" ng-model="newTaskType" ng-show="newTodo.taskType === ''">
+                </div>
+                <div class="form-group">
+                    <label for="dueDate">Due Date:</label>
+                    <input type="date" class="form-control" id="dueDate" ng-model="newTodo.dueDate">
+                </div>
+                <div class="form-group">
+                    <label for="cost">Cost:</label>
+                    <input type="number" class="form-control" id="cost" ng-model="newTodo.cost">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="addTodo()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Add Bootstrap JavaScript file after jQuery -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
