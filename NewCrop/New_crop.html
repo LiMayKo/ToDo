@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Crops App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Button to add new crop -->
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addCropModal">Add New
+        Crop</button>
+
+    <div class="container">
+        <!-- Add Crop Modal -->
+        <div class="modal fade" id="addCropModal" tabindex="-1" role="dialog" aria-labelledby="addCropModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addCropModalLabel">Add New Crop</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Crop photo upload input -->
+                        <div class="form-group">
+                            <label for="cropPhoto">Upload Crop Photo:</label>
+                            <input type="file" class="form-control-file" id="cropPhoto">
+                            <img id="cropPhotoPreview" src="" alt="Preview" style="display: none; max-width: 100%; height: auto;">
+                        </div>
+                        <!-- Crop name input -->
+                        <div class="form-group">
+                            <label for="cropName">Crop Name:</label>
+                            <input type="text" class="form-control" id="cropName">
+                        </div>
+                        <!-- Initial budget input -->
+                        <div class="form-group">
+                            <label for="initialBudget">Initial Budget:</label>
+                            <input type="number" class="form-control" id="initialBudget">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveCropBtn">Save Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<!-- Modal for displaying crop details -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalTitle">Crop Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="imageAndBudgetSection">
+                    <img id="modalCropImage" src="" alt="Crop Image" style="max-width: 100%;">
+                    <p id="modalInitialBudget"></p>
+                </div>
+                <div id="addTodoFormSection" style="display: none;">
+                    <!-- Add Todo form -->
+<form id="addTodoForm">
+    <div class="form-group">
+        <label for="taskType">Task Type:</label>
+        <input type="text" class="form-control" id="taskType" required>
+    </div>
+    <div class="form-group">
+        <label for="dueDate">Due Date:</label>
+        <input type="date" class="form-control" id="dueDate" required>
+    </div>
+    <div class="form-group">
+        <label for="cost">Cost:</label>
+        <input type="number" class="form-control" id="cost" required>
+    </div>
+    <!-- Save button for adding todo -->
+    <button type="button" class="btn btn-primary" id="saveTodoBtn">Save Todo</button>
+</form>
+
+                </div>
+                <button class="btn btn-primary mb-3" id="toggleAddTodoFormBtn">Add Todo</button>
+            </div>
+            <!-- Table to display todos -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Completed</th>
+            <th>Task Type</th>
+            <th>Due Date</th>
+            <th>Cost</th>
+        </tr>
+    </thead>
+    <tbody id="todoList"> <!-- This is the element where todos will be displayed -->
+        <!-- Todos will be populated dynamically here -->
+    </tbody>
+</table>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        <h3 class="mt-5 mb-3">My Crops</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Crop Name</th>
+                    <th>Initial Budget</th>
+                </tr>
+            </thead>
+            <tbody id="myCropsTable">
+                <!-- Populate with saved crops -->
+            </tbody>
+        </table>
+    </div>
+
+
+ <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
